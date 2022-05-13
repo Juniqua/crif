@@ -1,0 +1,92 @@
+<html>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
+	<script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
+<head>
+	
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Home</title>
+<div class="ui inverted segment">
+</head>
+<h1 class="ui huge header"><i class="home icon"></i>Home</h1>
+<body>
+	<div class="ui container">
+<div class="ui ordered steps">
+  <div class="completed step">
+    <div class="content">
+      <div class="title">Enter Info</div>
+      <div class="description">Enter your Financial Instition's information</div>
+    </div>
+  </div>
+  <div class="active step">
+    <div class="content">
+      <div class="title">Format</div>
+      <div class="description">Your information is formatting</div>
+    </div>
+  </div>
+  <div class="active step">
+    <div class="content">
+      <div class="title">Download</div>
+      <div class="description">Download your finished file</div>
+    </div>
+  </div>
+</div>
+</div>
+<div class="ui container">
+	  <form action="format_complete.html" method="POST" enctype="multipart/form-data">
+	  	{% csrf_token %}
+	  	<br>
+	  	<label for="f_i_code">Financial Institution Code:</label><br>
+	  	<div class="ui input focus">
+	  	<input type="text" id="f_i_code" name="f_i_code"  placeholder="XXXXX"required/>
+		</div><br>
+
+		
+	  	<label for="branch_code">Branch Code:</label><br>
+	  	<div class="ui input focus">
+	  	<input type="text" id="branch_code" name="branch_code"  placeholder="eg. 'BRANCH02'"required/>
+	  	</div><br>
+
+	  	
+	  	<label for="last_acc_date">Last Accounting Date:</label><br>
+	  	<div class="ui input focus">
+	  	<input type="text" id="last_acc_date" name="last_acc_date" placeholder="DDMMYYYY" required/>
+	  	</div><br>
+
+	  	
+	  	<label for="date_of_prod">Date of Production:</label><br>
+	  	<div class="ui input focus">
+	  	<input type="text" id="date_of_prod" name="date_of_prod" placeholder="DDMMYYYY" required/>
+	  	</div><br>
+
+	  	
+	  	<label for="code">Code:</label><br>
+	  	<div class="ui input focus">
+	  	<input type="text" id="code" name="code" placeholder="000" required/>
+	  	</div><br>
+
+	  	
+	  	<label for="corr_flag">Correction Flag:</label><br>
+	  	<div class="ui input focus">
+	  	<input type="text" id="corr_flag" name="corr_flag" placeholder="'1' or ' '" required/>
+	  	</div><br>
+	  	<br>
+	  	
+	  	<label for="corr_flag">Subject file:</label><br>
+	  	<input type="file" name="subject_columns" class="ui teal button" required/>
+	  	<br>
+
+	  	<br>
+	  	<label for="corr_flag">Contract file:</label><br>
+	  	<input type="file" name="contract_columns" class="ui teal button" required/>
+	  	<br>
+	  	<br>
+	  	<input class="btn btn-primary btn-md" role="button" type="submit" name="submit" value="Format" accept=".xlsx,.csv" class="ui blue button">
+	  </form>
+	  
+</div>
+</body>
+</div>
+</html>
+
+
