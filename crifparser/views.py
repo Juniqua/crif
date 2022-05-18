@@ -38,22 +38,12 @@ def home(request):
 inp = ['f_i_code','branch_code','last_acc_date','date_of_prod','code','corr_flag']
 ffields = ['contract_columns','subject_columns']
 def format_complete(request):
-    inp_dict ={}
-    form = clientform(request.GET or None, request.FILES or None)
-    def inputinfo(inp):
-        i = 0
-        while i < len(inp):
-            inp_dict = {inp[i]:request.GET[inp[i]]}
-            i+=1
-    if request.method=="GET":
-        inputinfo(inp)
-
-        
+       
         #post.contract_columns= request.FILES.get('contract_columns')
         #post.subject_columns= request.FILES.get('subject_columns')
-        items = inp
+
         #resp = FileResponse(open("C:/Users/Juniqua/Desktop/crif/uploads/contract.xlsx", 'rb'),as_attachment=True)#filename=
-    return render(request,'format_complete.html',{'content':items})
+    return render(request,'format_complete.html',{'content':inp})
 
 def get_zip():
     #get zip file and return complete html
