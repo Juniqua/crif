@@ -58,9 +58,9 @@ def info_review(request):
     clientinfo = {"client" : clientinfodata}
     #parser(inp, subdata,condata)
     #pyparser = joblib.load('parserpy.py')
-    pklparser = joblib.load('C:/Users/Juniqua/Desktop/crif/crifparser/parserpkl.pkl')
+    #pklparser = joblib.load('C:/Users/Juniqua/Desktop/crif/crifparser/parserpkl.pkl')
     pyparser = joblib.load('C:/Users/Juniqua/Desktop/crif/crifparser/parserpy.py')
-    pklparser(inp,subdata,condata)
+    #pklparser(inp,subdata,condata)
     pyparser(inp,subdata,condata)
     #pars(inp,subdata,condata)
 
