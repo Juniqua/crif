@@ -1,3 +1,4 @@
+from importlib.resources import files
 from multiprocessing import context
 from django.shortcuts import render
 from django.http import FileResponse, HttpResponse,request, response
@@ -49,23 +50,22 @@ def info_review(request):
     code = clientinfodata.code
     corr_flag = clientinfodata.corr_flag
 
-    subdata = clientinfodata.subject_columns
-    condata = clientinfodata.contract_columns
-
-
-    inp = [f_i_code,branch_code,last_acc_date,date_of_prod,code,corr_flag]
-
     clientinfo = {"client" : clientinfodata}
-    #parser(inp, subdata,condata)
-    #pyparser = joblib.load('parserpy.py')
-    #pklparser = joblib.load('C:/Users/Juniqua/Desktop/crif/crifparser/parserpkl.pkl')
-    pyparser = joblib.load('C:/Users/Juniqua/Desktop/crif/crifparser/parserpy.py')
-    #pklparser(inp,subdata,condata)
-    pyparser(inp,subdata,condata)
-    #pars(inp,subdata,condata)
 
     return render(request,'info_review.html',clientinfo)
 
-def get_zip():
+def download_zip(request):
     #get zip file and return complete html
-    return
+    clientinfodata = crifForm.objects.get(id=1)
+    subdata = clientinfodata.subject_columns
+    condata = clientinfodata.contract_columns
+    #files = 'C:/Users/Juniqua/Desktop/crif/downloads/CRIFCONTRACTDATA_BPARSING.xlsx'
+    parser(inp, subdata,condata)
+    #pyparser = joblib.load('parserpy.py')
+    #pklparser = joblib.load('C:/Users/Juniqua/Desktop/crif/crifparser/parserpkl.pkl')
+    #pyparser = joblib.load('C:/Users/Juniqua/Desktop/crif/crifparser/parserpy.py')
+    #pklparser(inp,subdata,condata)
+    #pyparser(inp,subdata,condata)
+    #pars(inp,subdata,condata)
+
+    return render(request,'download_zip.html')

@@ -20,7 +20,7 @@
       <div class="description">Check your information</div>
     </div>
   </div>
-  <div class="active step">
+  <div class="completed step">
     <div class="content">
       <div class="title">Download</div>
       <div class="description">Download your finished file</div>
@@ -28,12 +28,12 @@
   </div>
 </div>
 </div>
-<h1> Almost Done!</h1>
+<h1>Done!</h1>
 <br />
 <br />
 
 
-  <h1>Thank you. Please review the information you gave before proceeding:</h1>
+  <h1>Your file is ready</h1>
 <ul>
 {% csrf_token %}
 
@@ -49,7 +49,7 @@
 
 <!-- set form action to get zip--> 
 <br>
-	<form action="download_zip" method="GET" enctype="multipart">
+	<form action="" method="GET" enctype="multipart">
 		<h2>Is everything correct?...</h2>
     <br>
         <input type="submit" value="PROCEED" class="ui blue button">
