@@ -2,7 +2,8 @@ from multiprocessing import context
 from django.shortcuts import render
 from django.http import FileResponse, HttpResponse,request, response
 from crifparser.forms import clientform
-from crifparser.models import crifForm
+from crifparser.models import crifForm, crifFormInfo
+from crifparser.format_tool import parser
 import django
 django.setup()
 #from django.views.decorators.csrf import csrf_protect 
@@ -37,13 +38,24 @@ def home(request):
     return render(request, 'index.html',{'form':form}) # "Hello, Django!")
 inp = ['f_i_code','branch_code','last_acc_date','date_of_prod','code','corr_flag']
 ffields = ['contract_columns','subject_columns']
-def format_complete(request):
-       
-        #post.contract_columns= request.FILES.get('contract_columns')
-        #post.subject_columns= request.FILES.get('subject_columns')
+def info_review(request):
+    clientinfodata = crifForm.objects.get(id=1)
+    f_i_code = clientinfodata.f_i_code
+    branch_code = clientinfodata.branch_code
+    last_acc_date = clientinfodata.last_acc_date
+    date_of_prod = clientinfodata.date_of_prod
+    code = clientinfodata.code
+    corr_flag = clientinfodata.corr_flag
 
-        #resp = FileResponse(open("C:/Users/Juniqua/Desktop/crif/uploads/contract.xlsx", 'rb'),as_attachment=True)#filename=
-    return render(request,'format_complete.html',{'content':inp})
+    subdata = clientinfodata.subject_columns
+    condata = clientinfodata.contract_columns
+
+
+    inp = [f_i_code,branch_code,last_acc_date,date_of_prod,code,corr_flag]
+
+    clientinfo = {"client" : clientinfodata}
+    parser(inp, subdata,condata)
+    return render(request,'info_review.html',clientinfo)
 
 def get_zip():
     #get zip file and return complete html

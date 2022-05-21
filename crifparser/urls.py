@@ -4,6 +4,6 @@ from django.contrib.auth.models import User
 from . import views
 urlpatterns = [
     path("", views.home, name="home"),
-    path("format_complete",views.format_complete, name="format_complete"),
+    path("info_review",views.info_review, name="info_review"),
     #path("", views.index, name='index'),
 ]
