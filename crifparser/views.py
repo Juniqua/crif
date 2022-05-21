@@ -5,6 +5,7 @@ from crifparser.forms import clientform
 from crifparser.models import crifForm, crifFormInfo
 from crifparser.format_tool import parser
 import django
+import joblib
 django.setup()
 #from django.views.decorators.csrf import csrf_protect 
 
@@ -38,6 +39,7 @@ def home(request):
     return render(request, 'index.html',{'form':form}) # "Hello, Django!")
 inp = ['f_i_code','branch_code','last_acc_date','date_of_prod','code','corr_flag']
 ffields = ['contract_columns','subject_columns']
+
 def info_review(request):
     clientinfodata = crifForm.objects.get(id=1)
     f_i_code = clientinfodata.f_i_code
@@ -54,7 +56,14 @@ def info_review(request):
     inp = [f_i_code,branch_code,last_acc_date,date_of_prod,code,corr_flag]
 
     clientinfo = {"client" : clientinfodata}
-    parser(inp, subdata,condata)
+    #parser(inp, subdata,condata)
+    #pyparser = joblib.load('parserpy.py')
+    pklparser = joblib.load('C:/Users/Juniqua/Desktop/crif/crifparser/parserpkl.pkl')
+    pyparser = joblib.load('C:/Users/Juniqua/Desktop/crif/crifparser/parserpy.py')
+    pklparser(inp,subdata,condata)
+    pyparser(inp,subdata,condata)
+    #pars(inp,subdata,condata)
+
     return render(request,'info_review.html',clientinfo)
 
 def get_zip():
