@@ -3,10 +3,10 @@ from multiprocessing import context
 from django.shortcuts import render
 from django.http import FileResponse, HttpResponse,request, response
 from crifparser.forms import clientform
-from crifparser.models import crifForm, crifFormInfo
+from crifparser.models import crifForm
 from crifparser.format_tool import parser
 import django
-import joblib
+#import joblib
 django.setup()
 #from django.views.decorators.csrf import csrf_protect 
 
@@ -76,11 +76,11 @@ def download_zip(request):
     #pklparser(inp,subdata,condata)
     #pyparser(inp,subdata,condata)
     #pars(inp,subdata,condata)
-    import datetime as dt
-    today = dt.date.today()
-    filedate = today.strftime('%Y%m%d')
-    download_location = 'C:/Users/Juniqua/Desktop/crif/downloads'
-    date_and_code = str(download_location + filedate +'_'+ f_i_code+'.zip')
+    #import datetime as dt
+    #today = dt.date.today()
+    #filedate = today.strftime('%Y%m%d')
+    #download_location = 'C:/Users/Juniqua/Desktop/crif/downloads'
+    #date_and_code = str(download_location + filedate +'_'+ f_i_code+'.zip')
     return render(request,'download_zip.html',)
 
 def get_zip(response):
@@ -89,6 +89,13 @@ def get_zip(response):
     filedate = today.strftime('%Y%m%d')
     clientinfodata = crifForm.objects.get(id=1)
     f_i_code = clientinfodata.f_i_code
-    download_location = 'C:/Users/Juniqua/Desktop/crif/downloads'
-    date_and_code = str(download_location + filedate +'_'+ f_i_code+'.zip')
-    return (date_and_code)
+    
+    date_and_code = str('downloads/'+ filedate +'_'+ f_i_code+'.zip')
+    file_name = (filedate +'_'+ f_i_code+'.zip') 
+    f_data =  open(date_and_code, 'rb')
+    f_data = f_data.read()
+    # generate the file
+    response = HttpResponse(f_data, content_type='application/zip')
+    response['Content-Disposition'] = 'attachment; filename="' + file_name+'"'
+    return response
+    

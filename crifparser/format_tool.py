@@ -323,6 +323,9 @@ def parser(input_,SUBJECT_FILE,CONTRACT_FILE):
     chd = pd.DataFrame(chddata, columns = con_head_col)
     shd = pd.DataFrame(shddata, columns = sub_head_col)
     #PADS HEADER
+    #need to padd code with 0's
+    #df[col] = df[col].str.pad(8,side='left',fillchar='0')
+    #df[col] = df[col].str.slice(0,8)
     i = 0
     while i < len(con_head_pad): 
         padding_format(chd,con_head_col[i], con_head_pad[i],' ')
@@ -399,8 +402,8 @@ def parser(input_,SUBJECT_FILE,CONTRACT_FILE):
     sfd = sfd.replace('^','')
     cfd = cfd.replace('^','')
 
-    sub_filename = 'C:/Users/Juniqua/Desktop/crif/downloads/'+f_i_code+'SJF.txt'
-    con_filename = 'C:/Users/Juniqua/Desktop/crif/downloads/'+f_i_code+'CNF.txt'
+    sub_filename = f_i_code+'SJF.txt'
+    con_filename = f_i_code+'CNF.txt'
 
     sdText = open(sub_filename,'w')
     sdText.write(shd+sd+sfd)
@@ -424,7 +427,7 @@ def parser(input_,SUBJECT_FILE,CONTRACT_FILE):
     #title ZIP FILES
     #SETS THE FILE TO THE COMPANY'S INPUT NAME AND THE FILE DATE PROVIDED AT THE BEGINNING
 
-    download_location =  "C:/Users/Juniqua/Desktop/crif/downloads/"
+    download_location =  "downloads/"
     date_and_code = str(download_location + filedate +'_'+ f_i_code+'.zip') 
     
     #dnc = str(date_of_prod+'_'+f_i_code)
