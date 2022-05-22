@@ -3,11 +3,12 @@ import numpy as np
 import datetime as dt
 
 def parser(input_,SUBJECT_FILE,CONTRACT_FILE):
-
+    import pandas as pd
+    import numpy as np
     import datetime as dt
     today = dt.date.today()
-    filedate = today.strftime('%Y%m%d')
-    today = today.strftime('%d%m%Y')
+    filedate = today.strftime("%Y%m%d")
+    today = today.strftime("%d%m%Y")
 
     f_i_code = input_[0]
     branch_code = input_[1]
@@ -17,7 +18,7 @@ def parser(input_,SUBJECT_FILE,CONTRACT_FILE):
 
     date_of_prod = today 
 
-    input = f_i_code, branch_code, last_acc_date, code, corr_flag
+    #input = f_i_code, branch_code, last_acc_date, code, corr_flag
     #title READ IN CSV FILE, PAD AMT FOR SUB AN CON DF.
 
     #PADDING AMOUNTS FOR SUBJECT AND CONTRACT IN ORDER.
@@ -130,8 +131,8 @@ def parser(input_,SUBJECT_FILE,CONTRACT_FILE):
     cdf = cdf.fillna(' ') 
 
     #THE FILE BEFORE PARSING. BUT WITH THE COLUMN NAMES AND ORDER.
-    sdf.to_excel(r'C:/Users/Juniqua/Desktop/crif/downloads/CRIFSUBJECTDATA_BPARSING.xlsx',index=None)
-    cdf.to_excel(r'C:/Users/Juniqua/Desktop/crif/downloads/CRIFCONTRACTDATA_BPARSING.xlsx',index=None)
+    sdf.to_excel('C:/Users/Juniqua/Desktop/crif/downloads/CRIFSUBJECTDATA_BPARSING.xlsx',index=None)
+    cdf.to_excel('C:/Users/Juniqua/Desktop/crif/downloads/CRIFCONTRACTDATA_BPARSING.xlsx',index=None)
 
     #THE CODE HERE IS FOR CALCULATING THE TOTAL NUM OF PMTS IN THE DF
     #IN AN UPDATED VERSION I WILL MAKE THIS A FUNCTION YOU CAN CALL
@@ -150,12 +151,19 @@ def parser(input_,SUBJECT_FILE,CONTRACT_FILE):
     cdf['Num Of Payments past Due'] = cdf['Num Of Payments past Due'].str.pad(3,side='left',fillchar='0')
     cdf['Num Of Payments past Due'] = cdf['Num Of Payments past Due'].str.slice(0,3)
 
+    cdf['Outstanding Payments Number'] = cdf['Outstanding Payments Number'].str.pad(3,side='left',fillchar='0')
+    cdf['Outstanding Payments Number'] = cdf['Outstanding Payments Number'].str.slice(0,3)
     cdf['Outstanding Payments Number']=cdf['Outstanding Payments Number'].fillna(0)
     cdf['Outstanding Payments Number'] = cdf['Outstanding Payments Number'].astype(str)
 
-    cdf['Num Of Payments past Due']= pd.to_numeric(cdf['Num Of Payments past Due'])
-    cdf['Outstanding Payments Number']= pd.to_numeric(cdf['Outstanding Payments Number'])
-    cdf['Number of Payments']= pd.to_numeric(cdf['Number of Payments'])
+    cdf['Number of Payments'] = cdf['Number of Payments'].str.pad(3,side='left',fillchar='0')
+    cdf['Number of Payments'] = cdf['Number of Payments'].str.slice(0,3)
+    cdf['Number of Payments']=cdf['Number of Payments'].fillna(0)
+    cdf['Number of Payments'] = cdf['Number of Payments'].astype(str)
+
+    cdf['Num Of Payments past Due']= cdf['Num Of Payments past Due'].map(lambda x: int(x.replace(' ',''))).astype(int)
+    cdf['Outstanding Payments Number']= cdf['Outstanding Payments Number'].map(lambda x: int(x.replace(' ',''))).astype(int)
+    cdf['Number of Payments']= cdf['Number of Payments'].map(lambda x: int(x.replace(' ',''))).astype(int)
 
     #error files before export
     #err_df = cdf.loc[cdf['Number of Payments']<(cdf['Outstanding Payments Number']+cdf['Num Of Payments past Due'])]
@@ -173,8 +181,8 @@ def parser(input_,SUBJECT_FILE,CONTRACT_FILE):
     #duplicate start date and maturity date to contract req dat and contract actual end date
     cdf['Contract_req_date']=cdf['Start Date']
     cdf['Contract_end actual date'] = cdf['Maturity Date']
-    cdf['Maturity Date'] = pd.to_datetime(cdf['Maturity Date'])
-    cdf['Start Date'] = pd.to_datetime(cdf['Start Date'])
+    #cdf['Maturity Date'] = pd.to_datetime(cdf['Maturity Date'])
+    #cdf['Start Date'] = pd.to_datetime(cdf['Start Date'])
     cdf[['Maturity Date','Start Date']] = cdf[['Maturity Date','Start Date']].astype(str)
 
     #THIS FUNCTION PADS ALL THE NUMERICAL FIELDS
@@ -391,8 +399,8 @@ def parser(input_,SUBJECT_FILE,CONTRACT_FILE):
     sfd = sfd.replace('^','')
     cfd = cfd.replace('^','')
 
-    sub_filename = f_i_code+'SJF.txt'
-    con_filename = f_i_code+'CNF.txt'
+    sub_filename = 'C:/Users/Juniqua/Desktop/crif/downloads/'+f_i_code+'SJF.txt'
+    con_filename = 'C:/Users/Juniqua/Desktop/crif/downloads/'+f_i_code+'CNF.txt'
 
     sdText = open(sub_filename,'w')
     sdText.write(shd+sd+sfd)
@@ -418,7 +426,7 @@ def parser(input_,SUBJECT_FILE,CONTRACT_FILE):
 
     download_location =  "C:/Users/Juniqua/Desktop/crif/downloads/"
     date_and_code = str(download_location + filedate +'_'+ f_i_code+'.zip') 
-    location = download_location + date_and_code
+    
     #dnc = str(date_of_prod+'_'+f_i_code)
     zfiles = (sub_filename,con_filename)
-    zipfiles(zfiles, location)
+    zipfiles(zfiles, date_and_code)

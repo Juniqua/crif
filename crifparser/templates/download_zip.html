@@ -38,21 +38,12 @@
 {% csrf_token %}
 
 
-	<form action="" method="GET" enctype="multipart/form-data">
-	<li>FINANCIAL INSTITUTION CODE - XXXXX: "{{client.f_i_code}}"</li>
-	<li>BRANCH CODE - BRANCH00:  "{{client.branch_code}}"</li>
-	<li>LAST ACCOUNTING DATE - 00000000: "{{client.last_acc_date}}"</li>
-	<li>PRODUCTION DATE - 00000000:  "{{client.date_of_prod}}"</li>
-	<li>CODE - 000:  "{{client.code}}"</li>
-	<li>CORRECTION FLAG - '1' or ' ':  "{{client.corr_flag}}"</li>
-	</form>
-
 <!-- set form action to get zip--> 
 <br>
 	<form action="" method="GET" enctype="multipart">
-		<h2>Is everything correct?...</h2>
-    <br>
-        <input type="submit" value="PROCEED" class="ui blue button">
+		<br>
+    <a href="C:/Users/Juniqua/Desktop/crif/downloads/20220521_AHLAL.zip" download>
+        <input type="submit" value="Download zip file" class="ui blue button">
       </form>
 
 

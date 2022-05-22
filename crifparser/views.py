@@ -57,8 +57,17 @@ def info_review(request):
 def download_zip(request):
     #get zip file and return complete html
     clientinfodata = crifForm.objects.get(id=1)
-    subdata = clientinfodata.subject_columns
-    condata = clientinfodata.contract_columns
+    f_i_code = clientinfodata.f_i_code
+    branch_code = clientinfodata.branch_code
+    last_acc_date = clientinfodata.last_acc_date
+    
+    code = clientinfodata.code
+    corr_flag = clientinfodata.corr_flag
+
+    subdata = "C:/Users/Juniqua/Desktop/crif/uploads/subject.xlsx"
+    condata = "C:/Users/Juniqua/Desktop/crif/uploads/contract.xlsx"
+
+    inp = [f_i_code,branch_code,last_acc_date,code,corr_flag]
     #files = 'C:/Users/Juniqua/Desktop/crif/downloads/CRIFCONTRACTDATA_BPARSING.xlsx'
     parser(inp, subdata,condata)
     #pyparser = joblib.load('parserpy.py')
@@ -67,5 +76,19 @@ def download_zip(request):
     #pklparser(inp,subdata,condata)
     #pyparser(inp,subdata,condata)
     #pars(inp,subdata,condata)
+    import datetime as dt
+    today = dt.date.today()
+    filedate = today.strftime('%Y%m%d')
+    download_location = 'C:/Users/Juniqua/Desktop/crif/downloads'
+    date_and_code = str(download_location + filedate +'_'+ f_i_code+'.zip')
+    return render(request,'download_zip.html',)
 
-    return render(request,'download_zip.html')
+def get_zip(response):
+    import datetime as dt
+    today = dt.date.today()
+    filedate = today.strftime('%Y%m%d')
+    clientinfodata = crifForm.objects.get(id=1)
+    f_i_code = clientinfodata.f_i_code
+    download_location = 'C:/Users/Juniqua/Desktop/crif/downloads'
+    date_and_code = str(download_location + filedate +'_'+ f_i_code+'.zip')
+    return (date_and_code)
