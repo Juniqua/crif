@@ -16,7 +16,7 @@ def home(request):
     form = clientform(request.POST or None, request.FILES or None)
     if request.method=="POST":
         form = clientform(request.POST)
-        post=crifForm()
+        post=clientform()
         post.f_i_code= request.POST.get('f_i_code')
         post.branch_code= request.POST.get('branch_code')
         post.last_acc_date= request.POST.get('last_acc_date')
@@ -29,10 +29,10 @@ def home(request):
         # check if form data is valid
         if form.is_valid():
             form.save()
-            #return render(request,'format_complete.html', {'content': items} )
+            #return render(request,'info_review.html')
             
     else:
-        form = clientform()
+        form = crifForm()
         # save the form data to model
     context['form']= form
     # render function takes argument  - request
@@ -42,7 +42,7 @@ inp = ['f_i_code','branch_code','last_acc_date','date_of_prod','code','corr_flag
 ffields = ['contract_columns','subject_columns']
 
 def info_review(request):
-    clientinfodata = crifForm.objects.get(id=1)
+    clientinfodata = crifForm.objects.get(id=2)
     f_i_code = clientinfodata.f_i_code
     branch_code = clientinfodata.branch_code
     last_acc_date = clientinfodata.last_acc_date
@@ -56,7 +56,7 @@ def info_review(request):
 
 def download_zip(request):
     #get zip file and return complete html
-    clientinfodata = crifForm.objects.get(id=1)
+    clientinfodata = crifForm.objects.get(id=2)
     f_i_code = clientinfodata.f_i_code
     branch_code = clientinfodata.branch_code
     last_acc_date = clientinfodata.last_acc_date
@@ -87,7 +87,7 @@ def get_zip(response):
     import datetime as dt
     today = dt.date.today()
     filedate = today.strftime('%Y%m%d')
-    clientinfodata = crifForm.objects.get(id=1)
+    clientinfodata = crifForm.objects.get(id=2)
     f_i_code = clientinfodata.f_i_code
     
     date_and_code = str('downloads/'+ filedate +'_'+ f_i_code+'.zip')

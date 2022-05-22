@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    {% load static %}
+    <link rel="stylesheet" href="{% static "posts/css/bootstrap.min.css" %}">
+
+    <title>Django Blog</title>
+</head>
+<body class="container mt-5">
+<nav class="mb-3">
+    {% if user.is_authenticated %}
+        <form action="{% url 'accounts:logout' %}" method="post">
+            {% csrf_token %}
+            <button class="btn btn-primary btn-sm" type="submit">Log Out</button>
+        </form>
+    {% endif %}
+</nav>
+{% block content %}
+
+{% endblock content %}
+</body>
+</html>

@@ -20,5 +20,7 @@ from crifparser.views import home
 urlpatterns = [
     path("", include("crifparser.urls")),
     path('admin/', admin.site.urls),
+    path('accounts/', include('accounts.urls')),
+    path('posts/', include('posts.urls')),
 
 ]

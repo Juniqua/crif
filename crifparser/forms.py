@@ -11,7 +11,7 @@ class fileform(forms.ModelForm):
     class Meta:
         model = crifForm
         fields = ["subject_columns","contract_columns"]
-class fileform(forms.ModelForm):
+class infoform(forms.ModelForm):
     class Meta:
         model = crifForm
         fields = ['f_i_code','branch_code','last_acc_date','date_of_prod','code','corr_flag']
