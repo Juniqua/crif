@@ -61,7 +61,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'crif.urls','gettingstarted.urls'
+ROOT_URLCONF = 'crif.urls'#,'gettingstarted.urls'
 
 TEMPLATES = [
     {
@@ -79,7 +79,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'crif.wsgi.application','gettingstarted.wsgi.application'
+WSGI_APPLICATION = 'crif.wsgi.application'#,'gettingstarted.wsgi.application'
 
 
 # Database
