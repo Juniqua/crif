@@ -1,0 +1,1 @@
+web: gunicorn --chdir crifparser format_tool:app
