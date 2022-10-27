@@ -1,1 +1,1 @@
-web: gunicorn --chdir crifparser format_tool:app
+web: gunicorn --chdir crifparser views:app
