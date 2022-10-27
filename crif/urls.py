@@ -16,6 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from crifparser.views import home
+from accounts.views import login_view
 
 urlpatterns = [
     path("", include("crifparser.urls")),
