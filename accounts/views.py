@@ -23,8 +23,8 @@ def login_view(request):
             user = form.get_user()
             login(request, user)
             return redirect('posts:list')
-    else:
-        form = AuthenticationForm()
+    #else:
+        #form = AuthenticationForm()
     return render(request, 'accounts/login.html', {'form': form})
 
 def logout_view(request):
