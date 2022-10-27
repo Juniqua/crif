@@ -16,7 +16,7 @@ from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-#IS_HEROKU = "DYNO" in os.environ
+IS_HEROKU = "DYNO" in os.environ
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
@@ -25,18 +25,18 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-tj%@k03tq8n2t-6l#f9yp6ex#58%pa9-4b!skup55*4n(8rjgp'
 if 'SECRET_KEY' in os.environ:
     SECRET_KEY = os.environ["SECRET_KEY"]
+#
+#ALLOWED_HOSTS = ['crif-format.herokuapp.com','localhost','127.0.0.1']
+if IS_HEROKU:
+    ALLOWED_HOSTS = ['*']
 
-ALLOWED_HOSTS = ['crif-format.herokuapp.com']
-#if IS_HEROKU:
-#    ALLOWED_HOSTS = ['localhost', '127.0.0.1','https://tm-sys-dashbobord.herokuapp.com/', config('SERVER', default='127.0.0.1')]
-
-#else:
-#    ALLOWED_HOSTS = []
+else:
+    ALLOWED_HOSTS = []
 # SECURITY WARNING: don't run with debug turned on in production!
-#if not IS_HEROKU:
-DEBUG = False
+if not IS_HEROKU:
+    DEBUG = True
 
-#ALLOWED_HOSTS = []
+ALLOWED_HOSTS = []
 
 # Application definition
 

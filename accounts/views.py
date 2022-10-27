@@ -10,10 +10,10 @@ def signup_view(request):
             user = form.save()
             login(request, user)
             form.save()
-            return redirect('posts:list')
+            return redirect('login')
     else:
         form = UserCreationForm()
-    return render(request, 'accounts/signup.html', {'form': form})
+    #return render(request, 'accounts/signup.html', {'form': form})
 
 
 def login_view(request):
@@ -22,12 +22,12 @@ def login_view(request):
         if form.is_valid():
             user = form.get_user()
             login(request, user)
-            return redirect('home')
+            return redirect('crifparser.views.home')
         else:
             form = AuthenticationForm()
-            #return render(request, 'accounts/login.html', {'form': form})
+        #return render(request, 'accounts/login.html', {'form': form})
 
 def logout_view(request):
     if request.method == 'POST':
         logout(request)
-        return redirect('posts:list')
+        return redirect('login')
