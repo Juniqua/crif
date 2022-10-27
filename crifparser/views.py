@@ -42,7 +42,7 @@ inp = ['f_i_code','branch_code','last_acc_date','date_of_prod','code','corr_flag
 ffields = ['contract_columns','subject_columns']
 
 def info_review(request):
-    clientinfodata = crifForm.objects.get(id=2)
+    clientinfodata = crifForm.objects.get(id=1)
     f_i_code = clientinfodata.f_i_code
     branch_code = clientinfodata.branch_code
     last_acc_date = clientinfodata.last_acc_date
