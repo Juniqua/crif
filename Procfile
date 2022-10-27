@@ -1,1 +1,1 @@
-web: gunicorn --chdir crifparser views:app
+web: gunicorn crifparser.wsgi
