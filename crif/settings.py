@@ -13,6 +13,8 @@ import dj_database_url
 import os
 from django.test.runner import DiscoverRunner
 from pathlib import Path
+import django_heroku
+import dj_database_url
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -25,18 +27,18 @@ IS_HEROKU = "DYNO" in os.environ
 SECRET_KEY = 'django-insecure-tj%@k03tq8n2t-6l#f9yp6ex#58%pa9-4b!skup55*4n(8rjgp'
 if 'SECRET_KEY' in os.environ:
     SECRET_KEY = os.environ["SECRET_KEY"]
-#
+DEBUG = True
 #ALLOWED_HOSTS = ['crif-format.herokuapp.com','localhost','127.0.0.1']
-if IS_HEROKU:
-    ALLOWED_HOSTS = ['*']
+#if IS_HEROKU:
+#    ALLOWED_HOSTS = ['*']
 
-else:
-    ALLOWED_HOSTS = []
+#else:
+#    ALLOWED_HOSTS = []
 # SECURITY WARNING: don't run with debug turned on in production!
-if not IS_HEROKU:
-    DEBUG = True
+#if not IS_HEROKU:
+#    DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 # Application definition
 
@@ -156,8 +158,11 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
-STATIC_ROOT = BASE_DIR / "staticfiles"
+
 STATIC_URL = 'static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATICFILES_DIR = (os.path.join(BASE_DIR,'static'))
+django_heroku.settings(locals())
 
 # Enable WhiteNoise's GZip compression of static assets.
 #STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
