@@ -1,1 +1,1 @@
-web: gunicorn crifparser.wsgi
+web: gunicorn crif.wsgi
