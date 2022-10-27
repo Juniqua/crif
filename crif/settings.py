@@ -30,8 +30,8 @@ if 'SECRET_KEY' in os.environ:
 
 
 if IS_HEROKU:
-    ALLOWED_HOSTS = ["ALLOWED_HOSTS = ['localhost', '127.0.0.1','https://tm-sys-dashbobord.herokuapp.com/', config('SERVER', default='127.0.0.1')]
-"]
+    ALLOWED_HOSTS = ['localhost', '127.0.0.1','https://tm-sys-dashbobord.herokuapp.com/', config('SERVER', default='127.0.0.1')]
+
 else:
     ALLOWED_HOSTS = []
 # SECURITY WARNING: don't run with debug turned on in production!
