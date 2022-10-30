@@ -28,8 +28,8 @@ IS_HEROKU = "DYNO" in os.environ
 SECRET_KEY = 'django-insecure-tj%@k03tq8n2t-6l#f9yp6ex#58%pa9-4b!skup55*4n(8rjgp'
 if 'SECRET_KEY' in os.environ:
     SECRET_KEY = os.environ["SECRET_KEY"]
-DEBUG = True
-#ALLOWED_HOSTS = ['crif-format.herokuapp.com','localhost','127.0.0.1']
+DEBUG = False
+ALLOWED_HOSTS = ['crif-format.herokuapp.com','127.0.0.1','localhost']
 #if IS_HEROKU:
 #    ALLOWED_HOSTS = ['*']
 
@@ -39,7 +39,7 @@ DEBUG = True
 #if not IS_HEROKU:
 #    DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+#ALLOWED_HOSTS = ['*']
 
 # Application definition
 
