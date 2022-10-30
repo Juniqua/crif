@@ -65,9 +65,19 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
-]
+    #'crif.lockdown.RequireLoginMiddleware',
 
+]
+"""
+LOGIN_REQUIRED_URLS = (
+        r'/(.*)$',
+    )
+LOGIN_REQUIRED_URLS_EXCEPTIONS = (
+    r'/login(.*)$',
+    r'/logout(.*)$',
+)"""
 ROOT_URLCONF = 'crif.urls'#,'gettingstarted.urls'
+
 
 TEMPLATES = [
     {

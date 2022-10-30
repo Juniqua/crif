@@ -1,4 +1,4 @@
-#from tkinter import CASCADE
+from tkinter import CASCADE
 from django.db import models
 #from wsgiref.validate import validator
 from django.forms import CharField, FileField, IntegerField, DateField

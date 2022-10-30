@@ -3,7 +3,7 @@ from django.contrib.auth.forms import UserCreationForm,AuthenticationForm
 from django.contrib.auth import login,logout
 from crifparser.views import home
 # Create your views here.
-def signup_view(request):
+"""def signup_view(request):
     if request.method == 'POST':
         form = UserCreationForm(request.POST)
         if form.is_valid():
@@ -13,10 +13,10 @@ def signup_view(request):
             return redirect('login')
     else:
         form = UserCreationForm()
-    #return render(request, 'accounts/signup.html', {'form': form})
+    #return render(request, 'accounts/signup.html', {'form': form})"""
 
 
-def login_view(request):
+"""def login_view(request):
     if request.method == 'POST':
         form = AuthenticationForm(data=request.POST)
         if form.is_valid():
@@ -25,9 +25,9 @@ def login_view(request):
             return redirect('crifparser.views.home')
         else:
             form = AuthenticationForm()
-        #return render(request, 'accounts/login.html', {'form': form})
+        #return render(request, 'accounts/login.html', {'form': form})"""
 
-def logout_view(request):
+"""def logout_view(request):
     if request.method == 'POST':
         logout(request)
-        return redirect('login')
+        return redirect('login')"""

@@ -12,7 +12,7 @@
 <body class="container mt-5">
 <nav class="mb-3">
     {% if user.is_authenticated %}
-        <form action="{% url 'accounts:logout' %}" method="post">
+        <form action="{% url 'crifparser.views.home' %}" method="post">
             {% csrf_token %}
             <button class="btn btn-primary btn-sm" type="submit">Log Out</button>
         </form>

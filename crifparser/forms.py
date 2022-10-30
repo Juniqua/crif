@@ -1,6 +1,12 @@
 from dataclasses import field
 from django import forms
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.models import User
 from crifparser.models import crifForm
+class CreateUserForm(UserCreationForm):
+    class Meta:
+        model = User
+        fields=['username','email','password1','password2']
 
 class clientform(forms.ModelForm):
     class Meta:
@@ -11,6 +17,7 @@ class fileform(forms.ModelForm):
     class Meta:
         model = crifForm
         fields = ["subject_columns","contract_columns"]
+
 class infoform(forms.ModelForm):
     class Meta:
         model = crifForm
