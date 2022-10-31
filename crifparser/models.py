@@ -1,4 +1,3 @@
-#from tkinter import CASCADE
 from django.db import models
 #from wsgiref.validate import validator
 from django.forms import CharField, FileField, IntegerField, DateField
@@ -27,7 +26,7 @@ class crifForm(models.Model):
       return self.f_i_code
 
 class crifFormInfo(models.Model):
-    crifform = models.ForeignKey(crifForm, on_delete=models.CASCADE)
+    crifform = models.ForeignKey(crifForm)
     f_i_code = models.CharField("Financial Institution Code - XXXXX",max_length=5)
     branch_code = models.CharField("Branch Code - BRANCH00",max_length=8)
     last_acc_date = models.CharField("Last Accounting Date - DDMMYYYY - 00000000", max_length=8)
