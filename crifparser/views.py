@@ -73,10 +73,10 @@ def home(request):
         post.corr_flag= request.POST.get('corr_flag')
         post.contract_columns= request.FILES.get('contract_columns')
         post.subject_columns= request.FILES.get('subject_columns')
-        post.save()
+        post.save(force_insert=True)
         # check if form data is valid
         if form.is_valid():
-            form.save()
+            form.save(force_insert=True)
             return HttpResponse(request,"Saved")
             
         '''else:
