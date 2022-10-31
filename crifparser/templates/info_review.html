@@ -35,16 +35,16 @@
 
   <h1>Thank you. Please review the information you gave before proceeding:</h1>
 <ul>
-{% csrf_token %}
 
 
-	<form action="" method="GET" enctype="multipart/form-data">
-	<li>FINANCIAL INSTITUTION CODE - XXXXX: "{{client.f_i_code}}"</li>
-	<li>BRANCH CODE - BRANCH00:  "{{client.branch_code}}"</li>
-	<li>LAST ACCOUNTING DATE - 00000000: "{{client.last_acc_date}}"</li>
-	<li>PRODUCTION DATE - 00000000:  "{{client.date_of_prod}}"</li>
-	<li>CODE - 000:  "{{client.code}}"</li>
-	<li>CORRECTION FLAG - '1' or ' ':  "{{client.corr_flag}}"</li>
+	<form action="info_review" method="GET" enctype="multipart/form-data">
+  {% csrf_token %}
+	<li>FINANCIAL INSTITUTION CODE - XXXXX: "{{CrifClient.f_i_code}}"</li>
+	<li>BRANCH CODE - BRANCH00:  "{{CrifClient.branch_code}}"</li>
+	<li>LAST ACCOUNTING DATE - 00000000: "{{CrifClient.last_acc_date}}"</li>
+	<li>PRODUCTION DATE - 00000000:  "{{CrifClient.date_of_prod}}"</li>
+	<li>CODE - 000:  "{{CrifClient.code}}"</li>
+	<li>CORRECTION FLAG - '1' or ' ':  "{{CrifClient.corr_flag}}"</li>
 	</form>
 
 <!-- set form action to get zip--> 

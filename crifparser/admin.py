@@ -1,6 +1,6 @@
 from django.contrib import admin
-from .models import crifForm, crifFormInfo
+from .models import crifForm
 
 # Register your models here.
 admin.site.register(crifForm)
-admin.site.register(crifFormInfo)
+

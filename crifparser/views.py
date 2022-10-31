@@ -2,12 +2,11 @@ from importlib.resources import files
 from multiprocessing import context
 from django.shortcuts import render, redirect
 from django.http import FileResponse, HttpResponse,request, response
-from crifparser.forms import clientform
+from crifparser.forms import clientform,CreateUserForm
 from crifparser.models import crifForm
 from crifparser.format_tool import parser
 import django
-from django.contrib import messages
-from .forms import CreateUserForm
+from django.contrib import messages 
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import UserCreationForm,AuthenticationForm
 django.setup()
@@ -60,11 +59,17 @@ def logoutuser(request):
 @login_required(login_url='login')
 def home(request):
     context ={}
-    form = clientform(request.POST)
+    
+    form = clientform()
     if request.method=="POST":
-        form = clientform(request.POST or None, request.FILES or None)
-
-        post=clientform()
+        form = clientform(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('info_review')
+        else:
+            form=clientform()
+    return render(request, 'index.html') 
+"""        post=clientform()
         post.f_i_code= request.POST.get('f_i_code')
         post.branch_code= request.POST.get('branch_code')
         post.last_acc_date= request.POST.get('last_acc_date')
@@ -75,18 +80,11 @@ def home(request):
         post.subject_columns= request.FILES.get('subject_columns')
         post.save(force_insert=True)
         # check if form data is valid
-        if form.is_valid():
-            form.save(force_insert=True)
-            return HttpResponse(request,"Saved")
+        
+            return HttpResponse(request,"Saved")"""
             
-        '''else:
-            form = crifForm()'''
-        '''# save the form data to model
-        context['form']= form
-
-    # render function takes argument  - request
-    # and return HTML as response'''
-    return render(request, 'index.html',{'form':form}) # "Hello, Django!")
+       
+    # "Hello, Django!")
 inp = ['f_i_code','branch_code','last_acc_date','date_of_prod','code','corr_flag']
 ffields = ['contract_columns','subject_columns']
 
@@ -107,7 +105,7 @@ def info_review(request):
 @login_required(login_url='login')
 def download_zip(request):
     #get zip file and return complete html
-    clientinfodata = crifForm.objects.get(id=2)
+    clientinfodata = crifForm.objects.get(id=1)
     f_i_code = clientinfodata.f_i_code
     branch_code = clientinfodata.branch_code
     last_acc_date = clientinfodata.last_acc_date
