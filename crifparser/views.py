@@ -60,9 +60,10 @@ def logoutuser(request):
 @login_required(login_url='login')
 def home(request):
     context ={}
-    form = clientform(request.POST or None, request.FILES or None)
+    form = clientform(request.POST)
     if request.method=="POST":
-        form = clientform(request.POST)
+        form = clientform(request.POST or None, request.FILES or None)
+
         post=clientform()
         post.f_i_code= request.POST.get('f_i_code')
         post.branch_code= request.POST.get('branch_code')
@@ -76,19 +77,20 @@ def home(request):
         # check if form data is valid
         if form.is_valid():
             form.save()
-            #return render(request,'info_review.html')
+            return HttpResponse(request,"Saved")
             
-        else:
-            form = crifForm()
-        # save the form data to model
+        '''else:
+            form = crifForm()'''
+        '''# save the form data to model
         context['form']= form
+
     # render function takes argument  - request
-    # and return HTML as response
+    # and return HTML as response'''
     return render(request, 'index.html',{'form':form}) # "Hello, Django!")
 inp = ['f_i_code','branch_code','last_acc_date','date_of_prod','code','corr_flag']
 ffields = ['contract_columns','subject_columns']
 
-login_required(login_url='login')
+@login_required(login_url='login')
 def info_review(request):
     clientinfodata = crifForm.objects.get(id=1)
     f_i_code = clientinfodata.f_i_code
